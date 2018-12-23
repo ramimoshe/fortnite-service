@@ -19,9 +19,13 @@ exports.add = (ctx) => {
 };
 
 exports.get = (ctx) => {
-    ctx.body   = {
-        id: repository.get(ctx.params.id)
-    };
+    const player = repository.get(ctx.params.id);
+    if (!player) {
+        ctx.status = 404;
+    } else {
+        ctx.status = 200;
+        ctx.body   = player;
+    }
     ctx.status = 200;
 };
 
