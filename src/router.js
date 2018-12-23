@@ -11,7 +11,7 @@ const health            = require('./controllers/health');
 exports.getRouteTable = () => {
     const koaRouter = new KoaRouter();
 
-    koaRouter.get('/health', health.getStatus);
+    koaRouter.get('/management/health', health.getStatus);
 
     const rv = new KoaRouteValidator();
     rv.on('warn', console.warn);
