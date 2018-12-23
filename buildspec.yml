@@ -5,7 +5,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - $(aws ecr get-login --region us-east-2 --no-include-email)
       - REPOSITORY_URI=888175482348.dkr.ecr.us-east-2.amazonaws.com/fortnite
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
   build:
