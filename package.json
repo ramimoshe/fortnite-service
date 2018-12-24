@@ -20,7 +20,7 @@
     "joi": "^13.1.2",
     "koa": "^2.2.0",
     "koa-bodyparser": "4.2.0",
-    "koa-route-validator": "0.0.2",
+    "koa-route-validator": "0.0.3",
     "koa-router": "^7.0.0",
     "lodash": "^4.17.5",
     "uuid": "^3.3.2"

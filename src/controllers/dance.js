@@ -1,11 +1,10 @@
 'use strict';
 
 const Joi        = require('joi');
-const repository = require('../services/repository');
 
 
 exports.get = (ctx) => {
-    const dance = repository.get(ctx.params.id);
+    const dance = { name: 'Disco Fever' };
 
     if (!dance) {
         ctx.status = 404;
