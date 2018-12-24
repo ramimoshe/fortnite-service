@@ -33,5 +33,6 @@ const addPlayerSchema = Joi.object({
     name : Joi.string().required(),
     age  : Joi.number().min(0).max(10).optional(),
     level: Joi.number().min(1).max(100).optional().default(1),
-    birth: Joi.string().isoDate().optional()
+    birth: Joi.string().isoDate().optional(),
+    email: Joi.string().email().optional()
 }).and('age', 'birth').unknown();
