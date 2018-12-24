@@ -1,5 +1,5 @@
 FROM node:dubnium
-EXPOSE 8080
+EXPOSE 80
 
 WORKDIR /usr/src/app
 COPY package*.json ./
