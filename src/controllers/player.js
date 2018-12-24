@@ -1,8 +1,10 @@
 'use strict';
 
-const Joi        = require('joi');
-const repository = require('../services/repository');
+const Joi    = require('joi');
+const uuidv4 = require('uuid/v4');
+const Keyv   = require('keyv');
 
+const db = new Keyv();
 
 exports.add = (ctx) => {
     const validationResult = Joi.validate(ctx.request.body, addPlayerSchema);
@@ -12,14 +14,15 @@ exports.add = (ctx) => {
         return;
     }
 
-    ctx.body   = {
-        id: repository.add(validationResult.value)
-    };
+    const id = uuidv4();
+    db.set(id, validationResult.value);
+
+    ctx.body   = { id };
     ctx.status = 200;
 };
 
 exports.get = (ctx) => {
-    const player = repository.get(ctx.params.id);
+    const player = db.get(ctx.params.id);
     if (!player) {
         ctx.status = 404;
         return;

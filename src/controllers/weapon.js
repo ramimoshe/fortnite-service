@@ -1,11 +1,21 @@
 'use strict';
 
-const Joi        = require('joi');
-const repository = require('../services/repository');
+const Joi    = require('joi');
+const uuidv4 = require('uuid/v4');
+const Keyv   = require('keyv');
 
+const db = new Keyv();
+
+exports.add = (ctx) => {
+    const id = uuidv4();
+    db.set(id, ctx.request.body);
+
+    ctx.body   = { id };
+    ctx.status = 200;
+};
 
 exports.get = (ctx) => {
-    const weapon = repository.get(ctx.params.id);
+    const weapon = db.get(ctx.params.id);
     if (!weapon) {
         ctx.status = 404;
         return;
@@ -13,13 +23,6 @@ exports.get = (ctx) => {
 
     ctx.status = 200;
     ctx.body   = weapon;
-};
-
-exports.add = (ctx) => {
-    ctx.body   = {
-        id: repository.add(ctx.request.body)
-    };
-    ctx.status = 200;
 };
 
 exports.schemas = {
