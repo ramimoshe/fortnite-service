@@ -11,7 +11,7 @@ exports.add = (ctx) => {
     db.set(id, ctx.request.body);
 
     ctx.body   = { id };
-    ctx.status = 200;
+    ctx.status = 201;
 };
 
 exports.get = (ctx) => {

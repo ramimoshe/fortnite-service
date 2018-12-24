@@ -18,7 +18,7 @@ exports.add = (ctx) => {
     db.set(id, validationResult.value);
 
     ctx.body   = { id };
-    ctx.status = 200;
+    ctx.status = 201;
 };
 
 exports.get = (ctx) => {
