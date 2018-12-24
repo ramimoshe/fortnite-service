@@ -22,11 +22,11 @@ exports.get = (ctx) => {
     const map = repository.get(ctx.params.id);
     if (!map) {
         ctx.status = 404;
-    } else {
-        ctx.status = 200;
-        ctx.body   = map;
+        return;
     }
+
     ctx.status = 200;
+    ctx.body   = map;
 };
 
 const addMapSchema = Joi.object({

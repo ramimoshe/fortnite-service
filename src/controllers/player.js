@@ -22,11 +22,11 @@ exports.get = (ctx) => {
     const player = repository.get(ctx.params.id);
     if (!player) {
         ctx.status = 404;
-    } else {
-        ctx.status = 200;
-        ctx.body   = player;
+        return;
     }
+
     ctx.status = 200;
+    ctx.body   = player;
 };
 
 const addPlayerSchema = Joi.object({

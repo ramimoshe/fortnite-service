@@ -9,10 +9,11 @@ exports.get = (ctx) => {
 
     if (!dance) {
         ctx.status = 404;
-    } else {
-        ctx.status = 200;
-        ctx.body   = dance;
+        return;
     }
+
+    ctx.status = 200;
+    ctx.body   = dance;
 };
 
 exports.schemas = {

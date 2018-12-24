@@ -6,13 +6,13 @@ const repository = require('../services/repository');
 
 exports.get = (ctx) => {
     const weapon = repository.get(ctx.params.id);
-
     if (!weapon) {
         ctx.status = 404;
-    } else {
-        ctx.status = 200;
-        ctx.body   = weapon;
+        return;
     }
+
+    ctx.status = 200;
+    ctx.body   = weapon;
 };
 
 exports.add = (ctx) => {
@@ -23,15 +23,15 @@ exports.add = (ctx) => {
 };
 
 exports.schemas = {
-    getParams            : Joi.object({
+    getParams: Joi.object({
         id: Joi.string().guid({
             version: ['uuidv4']
         }).required()
     }),
-    addBody              : Joi.object({
-        name: Joi.string().invalid('MACHINE_GUN', 'PISTOL').required(),
-        bullets : Joi.number().min(0).max(10).required(),
-        info: Joi.string().min(1).max(1000).optional(),
-        level: Joi.string().min(1).max(100).optional()
+    addBody  : Joi.object({
+        name   : Joi.string().invalid('MACHINE_GUN', 'PISTOL').required(),
+        bullets: Joi.number().min(0).max(10).required(),
+        info   : Joi.string().min(1).max(1000).optional(),
+        level  : Joi.string().min(1).max(100).optional()
     }).unknown()
 };
