@@ -24,14 +24,11 @@ exports.add = (ctx) => {
 
 exports.schemas = {
     getParams: Joi.object({
-        id: Joi.string().guid({
-            version: ['uuidv4']
-        }).required()
+        id: Joi.string().guid({ version: ['uuidv4'] }).required()
     }),
     addBody  : Joi.object({
-        name   : Joi.string().invalid('MACHINE_GUN', 'PISTOL').required(),
+        name   : Joi.string().valid('MACHINE_GUN', 'PISTOL').required(),
         bullets: Joi.number().min(0).max(10).required(),
-        info   : Joi.string().min(1).max(1000).optional(),
-        level  : Joi.string().min(1).max(100).optional()
+        info   : Joi.string().min(1).max(1000).optional()
     }).unknown()
 };

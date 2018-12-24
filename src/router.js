@@ -3,24 +3,30 @@
 const KoaRouter         = require('koa-router');
 const KoaRouteValidator = require('koa-route-validator');
 const weapon            = require('./controllers/weapon');
-const dance             = require('./controllers/dance');
 const player            = require('./controllers/player');
-const map             = require('./controllers/map');
 const health            = require('./controllers/health');
 
 
 exports.getRouteTable = () => {
     const koaRouter = new KoaRouter();
 
+    addHealthRoute(koaRouter);
+    addPlayerRoutes(koaRouter);
+    addWeaponRoutes(koaRouter);
+
+    return koaRouter;
+};
+
+function addHealthRoute(koaRouter) {
     koaRouter.get('/management/health', health.getStatus);
+}
 
-
-    koaRouter.post('/map', map.add);
-    koaRouter.get('/map/:id', map.get);
-
+function addPlayerRoutes(koaRouter) {
     koaRouter.post('/player', player.add);
     koaRouter.get('/player/:id', player.get);
+}
 
+function addWeaponRoutes(koaRouter) {
     const rv = new KoaRouteValidator();
     rv.on('warn', console.warn);
 
@@ -34,29 +40,4 @@ exports.getRouteTable = () => {
             body: weapon.schemas.addBody
         }
     }), weapon.add);
-
-    koaRouter.get('/dance/invalid-response', rv.create({
-        responseSchema: {
-            body: dance.schemas.unmatchedResponse
-        }
-    }), dance.get);
-
-    return koaRouter;
-};
-
-function addWorldRoutes(koaRouter) {
-
 }
-
-function addPlayerRoutes(koaRouter) {
-
-}
-
-function addWeaponRoutes(koaRouter) {
-
-}
-
-function addDanceRoutes(koaRouter) {
-
-}
-
