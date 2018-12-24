@@ -8,7 +8,7 @@ exports.add = (ctx) => {
     const validationResult = Joi.validate(ctx.request.body, addPlayerSchema);
     if (validationResult.error) {
         ctx.status = 400;
-        ctx.body   = validationResult.message;
+        ctx.body   = validationResult.error.message;
         return;
     }
 
