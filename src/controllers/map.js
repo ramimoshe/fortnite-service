@@ -5,7 +5,7 @@ const repository = require('../services/repository');
 
 
 exports.add = (ctx) => {
-    const validationResult = Joi.validate(ctx.request.body, addWorldSchema);
+    const validationResult = Joi.validate(ctx.request.body, addMapSchema);
     if (validationResult.error) {
         ctx.status = 400;
         ctx.body   = validationResult.message;
@@ -19,17 +19,17 @@ exports.add = (ctx) => {
 };
 
 exports.get = (ctx) => {
-    const world = repository.get(ctx.params.id);
-    if (!world) {
+    const map = repository.get(ctx.params.id);
+    if (!map) {
         ctx.status = 404;
     } else {
         ctx.status = 200;
-        ctx.body   = world;
+        ctx.body   = map;
     }
     ctx.status = 200;
 };
 
-const addWorldSchema = Joi.object({
+const addMapSchema = Joi.object({
     name        : Joi.string().required(),
-    playersCount: Joi.number().min(1).max(100).optional()
+    playersCount: Joi.number().min(1).max(100).required()
 }).unknown();
