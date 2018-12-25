@@ -30,14 +30,15 @@ function addWeaponRoutes(koaRouter) {
     const rv = new KoaRouteValidator();
     rv.on('warn', console.warn);
 
-    koaRouter.get('/weapon/:id', rv.create({
-        requestSchema: {
-            params: weapon.schemas.get.params
-        }
-    }), weapon.get);
     koaRouter.post('/weapon', rv.create({
         requestSchema: {
             body: weapon.schemas.add.body
         }
     }), weapon.add);
+
+    koaRouter.get('/weapon/:id', rv.create({
+        requestSchema: {
+            params: weapon.schemas.get.params
+        }
+    }), weapon.get);
 }
