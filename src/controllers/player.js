@@ -33,9 +33,7 @@ exports.get = (ctx) => {
 };
 
 const addPlayerSchema = Joi.object({
-    name : Joi.string().required(),
-    age  : Joi.number().min(0).max(10).optional(),
-    level: Joi.number().min(1).max(100).default(1),
-    birth: Joi.string().isoDate().optional(),
-    email: Joi.string().email().optional()
-}).and('age', 'birth').unknown();
+    name  : Joi.string().required(),
+    level : Joi.number().min(1).max(100).default(1),
+    dances: Joi.array().items(Joi.string().valid(['Floss', 'Dance Moves', 'Electro Shuffle'])).default([])
+}).and('level', 'dances').unknown();

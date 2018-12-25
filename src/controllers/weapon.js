@@ -26,12 +26,19 @@ exports.get = (ctx) => {
 };
 
 exports.schemas = {
-    getParams: Joi.object({
-        id: Joi.string().guid({ version: ['uuidv4'] }).required()
-    }),
-    addBody  : Joi.object({
-        name   : Joi.string().valid('MACHINE_GUN', 'PISTOL').required(),
-        bullets: Joi.number().min(0).max(10).required(),
-        info   : Joi.string().min(1).max(1000).optional()
-    }).unknown()
+    get: {
+        params: Joi.object({
+            id: Joi.string().guid({ version: ['uuidv4'] }).required()
+        })
+    },
+    add: {
+        body: Joi.object({
+            name       : Joi.string().min(1).max(100).required(),
+            rarity     : Joi.string().valid('Epic', 'Legendary', 'Common', 'Uncommon', 'Rare').required(),
+            damage     : Joi.number().min(1).max(200).required(),
+            reloadSpeed: Joi.number().precision(1).min(0.1).max(10).required(),
+            fireRate   : Joi.number().precision(2).min(0.1).max(10).required(),
+            dps        : Joi.number().precision(1).min(0.1).max(200).required()
+        })
+    }
 };

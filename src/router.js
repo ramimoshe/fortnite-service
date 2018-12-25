@@ -32,12 +32,12 @@ function addWeaponRoutes(koaRouter) {
 
     koaRouter.get('/weapon/:id', rv.create({
         requestSchema: {
-            params: weapon.schemas.getParams
+            params: weapon.schemas.get.params
         }
     }), weapon.get);
     koaRouter.post('/weapon', rv.create({
         requestSchema: {
-            body: weapon.schemas.addBody
+            body: weapon.schemas.add.body
         }
     }), weapon.add);
 }
