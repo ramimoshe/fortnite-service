@@ -28,7 +28,6 @@ function addPlayerRoutes(koaRouter) {
 
 function addWeaponRoutes(koaRouter) {
     const rv = new KoaRouteValidator();
-    rv.on('warn', console.warn);
 
     koaRouter.post('/weapon', rv.create({
         requestSchema: {
