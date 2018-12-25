@@ -6,7 +6,7 @@ const Keyv   = require('keyv');
 
 const db = new Keyv();
 
-exports.add = (ctx) => {
+exports.add = async (ctx) => {
     const validationResult = Joi.validate(ctx.request.body, addPlayerSchema);
     if (validationResult.error) {
         ctx.status = 400;
@@ -15,14 +15,14 @@ exports.add = (ctx) => {
     }
 
     const id = uuidv4();
-    db.set(id, validationResult.value);
+    await db.set(id, validationResult.value);
 
     ctx.body   = { id };
     ctx.status = 201;
 };
 
-exports.get = (ctx) => {
-    const player = db.get(ctx.params.id);
+exports.get = async (ctx) => {
+    const player = await db.get(ctx.params.id);
     if (!player) {
         ctx.status = 404;
         return;

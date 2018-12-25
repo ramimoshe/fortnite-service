@@ -6,16 +6,16 @@ const Keyv   = require('keyv');
 
 const db = new Keyv();
 
-exports.add = (ctx) => {
+exports.add = async (ctx) => {
     const id = uuidv4();
-    db.set(id, ctx.request.body);
+    await db.set(id, ctx.request.body);
 
     ctx.body   = { id };
     ctx.status = 201;
 };
 
-exports.get = (ctx) => {
-    const weapon = db.get(ctx.params.id);
+exports.get = async (ctx) => {
+    const weapon = await db.get(ctx.params.id);
     if (!weapon) {
         ctx.status = 404;
         return;
