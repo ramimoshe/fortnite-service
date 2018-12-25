@@ -6,7 +6,4 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
-ARG GIT_COMMIT
-ENV GIT_COMMIT ${GIT_COMMIT}
-
 CMD ["npm", "start"]
