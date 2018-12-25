@@ -17,6 +17,8 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - docker run $REPOSITORY_URI npm run test
+      - echo Tests was finished
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI
       - docker push $REPOSITORY_URI:$IMAGE_TAG
@@ -24,3 +26,4 @@ phases:
       - printf '[{"name":"fortnite-hands-on","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
+
